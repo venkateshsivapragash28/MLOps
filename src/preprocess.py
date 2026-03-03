@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 import joblib
 
-df = pd.read_csv("data/train.csv")
+df = pd.read_csv("data/raw.csv")
 df = df.drop(columns=['id'])
 
 X = df.drop(columns=['exam_score', 'age'])

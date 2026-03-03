@@ -1,22 +1,31 @@
 stages:
   preprocess:
-    cmd: python preprocess.py
+    cmd: python src/preprocess.py
     deps:
-    - data/raw.csv
-    - preprocess.py
+      - src/preprocess.py
+      - data/raw.csv
     outs:
-    - data/processed.csv
+      - data/x_train.csv
+      - data/x_test.csv
+      - data/y_train.csv
+      - data/y_test.csv
+      - models/scaler.pkl
+
   train:
-    cmd: python train.py
+    cmd: python src/train.py
     deps:
-    - data/processed.csv
-    - train.py
+      - src/train.py
+      - data/x_train.csv
+      - data/y_train.csv
     outs:
-    - model.pkl
+      - models/model.pkl
+
   evaluate:
-    cmd: python evaluate.py
+    cmd: python src/evaluate.py
     deps:
-    - evaluate.py
-    - model.pkl
+      - src/evaluate.py
+      - models/model.pkl
+      - data/x_test.csv
+      - data/y_test.csv
     metrics:
-    - metrics.json
+      - metrics.json
